@@ -5,7 +5,7 @@ require_once 'config.php';
 /**
  * Description of Discount_Model
  *
- * @author sarju dooly <elo_kaveesh@hotmail.co.uk>
+ * @author Gulshan Bhaugeerothee
  */
 class Discount_Model implements IDiscount_IModel {
 

@@ -3,7 +3,7 @@
 /**
  * Description of Condition_Model
  *
- * @author sarju dooly <elo_kaveesh@hotmail.co.uk>
+ * @author Gulshan Bhaugeerothee
  */
 class Condition_Model {
     //put your code here

@@ -4,7 +4,6 @@
  *
  * @author Gulshan Bhaugeerothee
  */
-interface ICondition_IModel {
-    
+interface IMarket_IModel {
     
 }

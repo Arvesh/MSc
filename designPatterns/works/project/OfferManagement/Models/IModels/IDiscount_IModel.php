@@ -2,7 +2,7 @@
 
 /**
  *
- * @author sarju dooly <elo_kaveesh@hotmail.co.uk>
+ * @author Gulshan Bhaugeerothee
  */
 interface IDiscount_IModel {
    
