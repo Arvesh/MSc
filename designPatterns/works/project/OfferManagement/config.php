@@ -12,18 +12,25 @@ function __autoload($class) {
   $classType = $seperate[1];
 
   switch ($classType) {
+      
     case 'Model':
-      $path = 'Models/';
+        $path = 'Models/';
       break;
 
     case 'IModel':
-      $path = 'Models/IModels/';
+        $path = 'Models/IModels/';
       break;
 
     case 'Repository':
-      $path = 'Repositories/';
+        $path = 'Repositories/';
       break;
+  
+    case 'AModel':
+        $path = 'Models/AModels/';
+      break;
+  
     default:break;
+
   }
 
   require_once $path . $class . '.php';
