@@ -6,13 +6,10 @@ package javaresttrial;
  */
 public class JavaRestTrial {
 
+
   /**
-   * @param
-   * args
-   * the
-   * command
-   * line
-   * arguments
+   *
+   * @param args array string
    */
   public static void main(String[] args) {
     
