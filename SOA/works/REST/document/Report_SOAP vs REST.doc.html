@@ -1,0 +1,419 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Plagiarism Checker | Viper - Free Plagiarism Checker and Scanner Software</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link href="http://feeds.feedburner.com/ViperScanner" rel="alternate" type="application/rss+xml" title="ScanMyEssay RSS. News &amp; Updates"/>
+        <link href="http://www.scanmyessay.com/css/main.css" rel="stylesheet" type="text/css"/>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+        <script src="http://code.jquery.com/ui/1.8.21/jquery-ui.min.js" type="text/javascript"></script>
+        <link rel="shortcut icon" href="http://www.scanmyessay.com/favicon.ico"/>
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#exp-content").hide();
+                $("#s1").click(function () {
+                    $("#exp-content").fadeIn("slow"); //fadeIn
+                    $("#s1").hide();
+                });
+                $("#h1").click(function () {
+                    $("#exp-content").hide("slow");
+                    $("#s1").show();
+                });
+            });
+            
+        </script>
+
+        <style type="text/css">
+        	
+        	#plg-notes {
+        		margin: 15px 0;
+        	}
+        .no-underline {
+        	text-decoration:none;
+        }
+        .matched-text 
+        {
+        	text-decoration:none;
+        	background-color: #fff86a /*#febbbb*/; 	
+        }
+        #document-text a {
+        	color: #000;
+        }
+        #document-text a:hover {
+        	color: #000;
+        }        
+        .divcenter {
+        	margin: 5px 0;
+        	padding-left: 1px;
+        }
+        .coner-radius 
+        {
+        	-moz-border-radius:3px;
+        	-webkit-border-radius:3px;
+        }
+        #h1 {
+        	display: block;
+        	text-align: right;
+        }
+        
+        #main 
+        {
+        	padding: 5px 5px 20px 5px;       	
+        }
+        #menu ul li h2 
+        {
+           	margin: 5px 5px;
+           	color: #ccc;
+        }
+          
+        	.main-container-top{
+        	
+        		border: 1px solid #fcefa1; /*need removing this*/
+        		background: #fbf9ee;
+        		width: auto;
+        		height: auto;
+        		margin-right: 0;
+        		margin-top: 40px;
+        		float: none;
+        	}
+            .main-container-mid {
+        	    border: 1px solid #aaa; /*need removing this*/
+            	width: auto;
+            	height:auto;
+            	margin: 5px 0;
+            }
+            .main-container-bottom {
+            	border: 1px solid #aaa; /*need removing this*/
+            	width: auto;
+            	height:auto;
+            	margin: 2px 0;	
+            }
+            
+        	.ie-h1-fix {
+        		margin-top: 0px;
+        		padding-bottom: 3px;
+        	}
+        	
+        	.red-text {
+        		color: #c40028;
+        	}
+        	
+        	#rounded-corner
+{
+	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+	font-size: 9px;
+	margin: 1px;
+	text-align: left;
+	border-collapse: collapse;
+	
+}
+
+#rounded-corner tbody 
+{
+	width: inherit;
+	height: 300px;
+	overflow: scroll;
+	overflow-x: hidden;
+}
+
+#rounded-corner thead th.rounded-location
+{
+	/* background: #ccc;  #b9c9fe;*/
+	-moz-border-radius-topleft: 3px;
+	-webkit-border-top-left-radius: 3px;
+    width: 40%;
+   /* background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(247,247,247,1)), color-stop(50%,rgba(132,132,132,1)), color-stop(50%,rgba(132,132,132,1)), color-stop(100%,rgba(229,229,229,1))); /* Chrome,Safari4+ */
+  /* background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(226,226,226,1)), color-stop(50%,rgba(219,219,219,1)), color-stop(51%,rgba(209,209,209,1)), color-stop(100%,rgba(254,254,254,1))); /* Chrome,Safari4+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(239,239,239,1)), color-stop(50%,rgba(219,219,219,1)), color-stop(52%,rgba(209,209,209,1)), color-stop(100%,rgba(242,242,242,1))); /* Chrome,Safari4+ */
+}
+#rounded-corner thead th.rounded-doc-title
+{
+    width: 30%;
+}
+#rounded-corner thead th.rounded-plg-wrd-count
+{
+}
+#rounded-corner thead th.rounded-mst-plg-pecnt
+{
+}
+#rounded-corner thead th.rounded-unq-wrds-mtch
+{
+}
+#rounded-corner thead th.rounded-unq-mtch-pecnt
+{
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(239,239,239,1)), color-stop(50%,rgba(219,219,219,1)), color-stop(52%,rgba(209,209,209,1)), color-stop(100%,rgba(242,242,242,1))); /* Chrome,Safari4+ */
+	/*background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(226,226,226,1)), color-stop(50%,rgba(219,219,219,1)), color-stop(51%,rgba(209,209,209,1)), color-stop(100%,rgba(254,254,254,1))); /* Chrome,Safari4+ */
+	/*background: #ccc;*/
+	-moz-border-radius-topright: 3px;
+	-webkit-border-top-right-radius: 3px;
+}
+#rounded-corner th
+{
+	padding: 8px;
+	font-weight: normal;
+	font-size: 13px;
+	color: #555;
+	/*background: #ccc;*/
+	/*background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(226,226,226,1)), color-stop(50%,rgba(219,219,219,1)), color-stop(51%,rgba(209,209,209,1)), color-stop(100%,rgba(254,254,254,1))); /* Chrome,Safari4+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(239,239,239,1)), color-stop(50%,rgba(219,219,219,1)), color-stop(52%,rgba(209,209,209,1)), color-stop(100%,rgba(242,242,242,1))); /* Chrome,Safari4+ */
+}
+#rounded-corner td
+{
+	padding: 8px;
+	background: #f9f9f9;
+	border-top: 1px solid #fff;
+	color: #555;
+	height: auto;
+}
+
+#rounded-corner tfoot td.rounded-foot-left
+{
+	/*background: #ccc;*/
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(242,242,242,1)), color-stop(50%,rgba(219,219,219,1)), color-stop(51%,rgba(209,209,209,1)), color-stop(100%,rgba(226,226,226,1))); /* Chrome,Safari4+ */
+	-moz-border-radius-bottomleft: 3px;
+	-webkit-border-bottom-left-radius: 3px;
+}
+#rounded-corner tfoot td.rounded-foot-right
+{
+	background: #ccc;
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(242,242,242,1)), color-stop(50%,rgba(219,219,219,1)), color-stop(51%,rgba(209,209,209,1)), color-stop(100%,rgba(226,226,226,1))); /* Chrome,Safari4+ */
+	-moz-border-radius-bottomright: 3px;
+	-webkit-border-bottom-right-radius: 3px;
+}
+#rounded-corner tbody tr:hover td
+{
+	background: #dadada;
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(50%,rgba(241,241,241,1)), color-stop(51%,rgba(225,225,225,1)), color-stop(100%,rgba(246,246,246,1))); /* Chrome,Safari4+ */
+	/*background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(235,241,246,1)), color-stop(50%,rgba(171,211,238,1)), color-stop(51%,rgba(137,195,235,1)), color-stop(100%,rgba(213,235,251,1))); /* Chrome,Safari4+ */
+	/*background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(50%,rgba(244,250,249,1)), color-stop(51%,rgba(231,245,243,1)), color-stop(100%,rgba(248,252,251,1))); /* Chrome,Safari4+ */
+	/*background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(50%,rgba(234,255,229,1)), color-stop(51%,rgba(209,255,199,1)), color-stop(100%,rgba(240,255,237,1))); /* Chrome,Safari4+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(50%,rgba(255,238,229,1)), color-stop(51%,rgba(255,219,199,1)), color-stop(100%,rgba(255,243,237,1))); /* Chrome,Safari4+ */
+}
+        </style>
+       
+    </head>
+    <body>
+        <div id="wrap">
+            
+            <div id="top">
+                <div id="top-left-tr">
+                    <a href="http://www.scanmyessay.com" title="ScanMyEssay">
+                        <span>Plagiarism Checker</span>
+                    </a> 
+                </div>
+
+                <div id="top-tr">
+                    <a href="http://www.scanmyessay.com/feedback/index.php" title="Contact us">Contact us</a>
+                    | 
+                    <a href="http://www.scanmyessay.com/universities.php">Universities</a>
+                    |
+                    <a href="http://www.scanmyessay.com/viper-background.php">History</a>
+                    |
+                    <a href="http://www.scanmyessay.com/testimonies.php">Testimonies</a>
+                    |
+                    <a href="http://www.scanmyessay.com/press/index.php" title="Viper Press">Press</a>
+                    |
+                    <a href="http://www.scanmyessay.com/about-us.php" title="About us">About us</a>
+                    |
+                    <a href="http://www.scanmyessay.com/sitemap.php" title="Sitemap">Sitemap</a>
+                    |
+                    <a href="http://www.scanmyessay.com/help/index.php" title="Help">Help</a>
+                    |
+                    <a href="http://www.ukessays.com/essay-help.php" title="Essay help" target="_blank">Essay help</a>
+                    |
+                    <a href="http://www.scanmyessay.com/rss/index.php" title="RSS">RSS</a>
+                    |
+                    <a href="http://www.scanmyessay.com/login/index.php" title="Log in">Log in</a>
+                </div>    
+            </div>
+               
+            <div id="menu">
+                <ul>
+                    <li>
+                        <h2>Plagiarism Report For 'SOAP vs REST.doc'</h2>
+                    </li>
+                </ul> 
+            </div>
+
+            <div id="main">
+                <div class="main-container-top coner-radius">
+                    <h1 class="red-text ie-h1-fix">
+                        How does Viper work.....?
+                    </h1>
+                    <a id="s1" class="no-underline" href="#">[+] Read more..</a>
+					<div id="exp-content">
+                        Viper scans your work against over 10 billion web pages and work previously 
+                        submitted to our firm. Once the scan is completed, the report delivers content 
+                        that may match these other sources, including links to the sites that contain 
+                        the same content.
+                        <br />
+                        <br />
+                        <b class="red-text">What Do the Results Mean?</b><br />
+                        If the report sends back positive matches to content found elsewhere, there is no need to panic and assume you have plagiarised your work. Instead, review the report carefully and consider the following:
+                       
+                        <ul>
+                        <li>
+                        Is the material an entire quote, a sentence, or a fragment of 4-5 words often found together? Viper will show a match where there is a string of five or more 
+                        words that are the same as your work. Even if this is not actually plagiarism, it is important that Viper does not ignore these fragments as they draw your 
+                        attention to any sentences where the writer has &#39;rephrased&#39; parts of the 
+                        original material without referencing the source.
+                        </li> 
+                            
+                        <li>If it was intended to be a quote that you were going to attribute to the source, 
+                            did you remember to properly reference it? Sometimes, Viper will identify 
+                            matching material that is available on websites, but the reference might have 
+                            been found within another source. Just because the work has content that matches 
+                            a particular website does not mean that every possible source where it appears 
+                            has to be referenced. Just make sure that at least one reference covers that 
+                        content.
+						</li>
+                        <li>Did you actually use a footnote and it was just simply not picked up by Viper? 
+                            This review is just a means of double-checking that all references have been 
+                            included.
+						</li>
+                        <li>Could Viper have just picked up a phrase that you used more than once in your 
+                            document? This may be a way to ensure that your writing is tight rather than 
+                            repetitive or relies on overly used phrases.
+						</li>    
+                        <li>Did you use too many direct quotes? Viper checks for direct quotes and delivers 
+                            an overall percentage of words it views as direct quotes. Clearly, this should 
+                            not be too high as work that relies too heavily on other material is not 
+                            &#39;original&#39;.
+						</li>
+                        </ul>
+                            <b class="red-text">A Guide on Viper Results</b>
+                            <br/>This guide explains how Viper can identify matching content when it scans your work:
+                            <br/>
+                            <br/><b class="red-text">Overall plagiarism rating 6% or less : </b>
+                            <br/>The results are that it is highly unlikely that this document contains plagiarised material. A careful check will only be necessary if this is a lengthy document. For example, a 6% result within a 15,000 word essay would be of concern because it could mean that direct quotes are too lengthy or there are too many places where a reference was not listed.<br/>
+                            <br/><b class="red-text">Overall plagiarism rating 6% - 12% : </b>
+                            <br/>The results are that there is a low risk that the document contains any plagiarised material. Most of the matching content will probably be fragments. Review your report for any sections that may not have been referenced properly.<br/>
+                            <br/><b class="red-text">Overall plagiarism rating 13% - 20% : </b>
+                            <br/>The results are that there is a medium risk that the document contains any plagiarised material. There may be sections that match websites so it is important to check that proper credit was attributed to the other sources. The scan may not have detected quotation marks or footnotes that were used. For example, if an opening quotation mark was included but there was not a closing quotation mark, then this could explain the higher result. <br/>
+                            <br/><b class="red-text">Overall plagiarism rating 21%+ : </b>
+                            <br/>The results are that there is a high risk that the document contains plagiarised material. If the overall rating is this high, you need to check your report very carefully. It may be that there are a lot of matching fragments and the software has not identified all direct quotes , but it is critical that you go through the entire document and address every phrase or fragment that the scan has flagged to reduce this percentage.<br/>
+                            <a id="h1" class="no-underline" href="#">[-] hide</a>
+                        
+                    </div>
+                </div>
+                <div class="main-container-mid coner-radius">
+                    <table id="rounded-corner" summary="URL found to be copied">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="rounded-location">Location</th>
+                                <th scope="col" class="rounded-doc-title">Title</th>
+                                <th scope="col" class="rounded-plg-wrd-count">Words Matched</th>
+                                <th scope="col" class="rounded-mst-plg-pecnt">Match (%)</th>
+                                <th scope="col" class="rounded-unq-wrds-mtch">Unique Words Matched</th>
+                                <th scope="col" class="rounded-unq-mtch-pecnt">Unique Match (%)</th>
+                            </tr>
+                        </thead>    
+                        <tfoot>
+                            <tr>
+                                <td colspan="5" class="rounded-foot-left"><em>Documents found to be plagiarised</em></td>
+                                <td class="rounded-foot-right">&nbsp;</td>
+                            </tr>
+                        </tfoot>
+                        <tbody id="ajaxtable">
+                            <tr><td><a href=http://ajaxonomy.com/2008/xml/web-services-part-1-soap-vs-rest target="_blank">http://ajaxonomy.com/2008/xml/web-services-part-1-soap-vs-rest</a></td><td>Web Services, Part 1: SOAP vs. REST | Ajaxonomy</td><td>11</td><td>1</td><td>11</td><td>1</td></tr><tr><td><a href=http://stackoverflow.com/questions/840653/wsdl-vs-rest-pros-and-cons target="_blank">http://stackoverflow.com/questions/840653/wsdl-vs-rest-pros-and-cons</a></td><td>web services - WSDL vs REST Pros and Cons - Stack Overflow</td><td>11</td><td>1</td><td>0</td><td><1</td></tr><tr><td><a href=http://stackoverflow.com/questions/10975863/compare-and-contrast-rest-and-soap-web-services target="_blank">http://stackoverflow.com/questions/10975863/compare-and-contrast-rest-and-soap-web-services</a></td><td>Compare and contrast REST and SOAP web services? - Stack Overflow</td><td>13</td><td>1</td><td>13</td><td>1</td></tr><tr><td><a href=http://k2underground.com/blogs/johnny/archive/2011/05/13/wcf-primer-tip-in-relationship-to-k2-services-and-smartobject-services.aspx target="_blank">http://k2underground.com/blogs/johnny/archive/2011/05/13/wcf-primer-tip-in-relationship-to-k2-services-and-smartobject-services.aspx</a></td><td>WCF Primer/Tip (in relationship to K2 Services and ...</td><td>11</td><td>1</td><td>0</td><td><1</td></tr><tr><td><a href=http://msdsalehi.blogspot.com/ target="_blank">http://msdsalehi.blogspot.com/</a></td><td>Knowledge Repository</td><td>11</td><td>1</td><td>0</td><td><1</td></tr>
+                        </tbody>
+                    </table>
+                    
+                </div>
+                <div id="plg-notes" class="divcenter red-text">
+                       <b> Total Plagiarism Threshold(%): 2%</b>
+                    </div> 
+                <div class="main-container-bottom coner-radius">
+                    <div id="document-text" class="divcenter">
+                        <h2>Master Document Text</h2>
+                        <!--<a href="" class="matched-text"> xyz </a> -->
+                        <p> UNIVERSITY OF TECHNOLOGY OF MAURITIUS<br /> SOAP vs REST<br /> COHORT : MSE 2012<br /> ID NUMBER<br /> MODULE : Service Oriented<br /> DATE :<br /> Introduction<br /><br /> A Web service is a system that has been designed to enable machines to int eract with each other over a network.  It is a programming service<br /> can be accessed remotely via protocols and XML.  A web service is defined by the Web Service Definition Language, consists of a set of tasks such<br /> messaging format, the transport pro tocols and the location.  It also provides details how to interact with the Web Service.  It can be<br /> an URL<br /> Advantage of using Web service<br /> Applications are loosely coupled, component oriented, cross-technology implementations<br /> It is reusable<br /> It helps makes applications more flexible in order to cope with ever changing business needs<br /> There are different types of technologies that are associated with the Web service<br /> Web Service Description Language (WSDL) - used to describe the web<br /><br /> Uni versal Description, Discovery and Integration (UDDI) - Contain information that are made available to a client wishing to make a contact with<br /> web service<br /> Hyper-Text Transport Protocol (HTTP) - A protocol used by the Internet<br /> eXtensible Markup Language  (XML) - A markup language for<br /> SOAP - A protocol for sending and responding to messages to a web<br /> REST - A protocol for sending and responding to messages to a web<br /> For this classwork we will be comparing between SOAP Based  Services and REST Based<br /> SOAP<br /><br /> Soap is a protocol which is used to exchange request and information in a decentralized environment.  It is a specification based on XML grammar<br /> both sending and responding to messages that aims to be hardware or  software independent i.e. message can be carried from a software written in Java<br /> programming language to a software written in PHP language and vice versa.  SOAP can be used on different type of transport protocol.  SOAP<br /> commonly used on HTTP.  A  SOAP Request can either be an HTTP POST or an<br /> SOAP consists of 3<br /> SOAP Encoding<br /> SOAP Convention<br /> SOAP envelope<br /> SOAP Encoding<br /><br /> SOAP includes predefined set of rules that are used to define how data types should be encoded into XML format.  Th ese rules allow the SOAP<br /> to identify data types such arrays, float etc.  The process of converting data types into XML is known as<br /> SOAP data types are divided into<br /> Scalar types<br /> They contain only one value e.g. price<br /> Compound types<br /> They c ontain multiple values such stock order and can further divided into arrays e.g. arrayType="xsd:string<br /> SOAP Convention<br /><br /> SOAP convention consists of Remote Procedure calls and responses.  Remote Procedure Calls is the way of communication between applic ations.<br /> convention property value "_xins-soap"   call an API that permits external software in different companies to communicate with each other using<br /> standard protocol<br /> SOAP Envelope<br /><br /> A SOAP Message is a document written in XML which consists of a  Mandatory SOAP Envelope and SOAP Body.  The SOAP Header is optional and<br /> ignored if necessary<br /> The envelope being the root element defines the message<br /><br /> The header can either be an HTTP Header (for sending and retrieving HTML pages) or SOAP Header (fo r sending additional information such as<br /> authentification).  SOAP Header is mainly used to identify to whom the message must be<br /> The body contains the XML message for e.g. the following message body contains a request for the price of mangoes<br /> xml version<br /> soap:Envelope<br /> xmlns:soap="http://www.w3.org/2001/12/soap-envelope<br /> soap:encodingStyle="http://www.w3.org/2001/12/soap-encoding<br /> soap:Body<br /> m:GetPrice xmlns:m="http://www.market.com/prices<br /> m:Item>Mangoes</m:Item<br /> m:GetP rice<br /> soap:Body<br /> soap:Envelope<br /> SOAP Request<br /> soap:Body<br /> m:GetPrice xmlns:m="http://www.market.com/prices<br /> m:Item>Mangoes</m:Item<br /> m:GetPrice<br /> soap:Body<br /><br /> In the body there is an element GetPrice.  This can be a function that will calculate the price of the m ango.  The web service <br /> function and then return a response<br /> SOAP Response<br /> soap:Body<br /> m:GetPriceResponse xmlns:m="http://www. market.com/prices<br /> m:Price>1.90</m:Price<br /> m:GetPriceResponse<br /> soap:Body<br /> The response is 1.90, the price  of<br /> Why use SOAP instead of REST<br /><br /> SOAP has been in use since the year 2000 whereas REST has been invented a few years ago.  SOAP was developed to be a platform and<br /> protocol for sending and responding to messages to a web ser vice.  Over the years, SOAP has combined together with the WSDL and the XML Schema<br /> become the standard the exchange of XML Messages.  SOAP supports WS Security that enables to maintain data integrity and privacy.  SOAP<br /> standard messaging syste m thus making it easier for the developers to understand and use whereas REST doesn't<br /><br /> SOAP is not limited to HTTP only but can be used on FTP, SMTP etc. while REST is bound only to HTTP.  REST is restricted mainly to CRUD (CREATE,<br /> UPDATE and DELET E) operations but SOAP can be coded to allow method calls.  Different types of data format can be used to transfer<br /> through REST e.g. JSON, XML but SOAP will use only XML to transfer information<br /> Advantages of SOAP over REST<br /> It is language, pla tform and protocol independent<br /> It is extensible<br /> It contains built in error handling<br /> It supports security<br /> Disadvantages of SOAP over REST<br /> It is more verbose<br /> It is more difficult to understand and develop than REST<br /> REST<br /><br /> REST is an architectural style , i ts definition is Representational state transfer. An architectural style is an abstraction as opposed to<br /> concrete thing for example a victorian house is different to the victorian architectural style which defines the attributes and characteristics you w<br /> ould see in the house. In the same way the REST architectural style is a set of architectural constraints you would see in a protocol built in that<br /> style. HTTP is built in that style<br /><br /> It is the architecture of the web that we use today. HTTP is a simple re quest and response protocol, the browser makes a request to the server ,<br /> server sends back a response<br /> Below is a sample HTTP  GET<br /> GET /freebies/ HTTP<br /> Host : arandomlink.org<br /> Accept-Encoding : compress, gzip<br /> User-Agent: Python-httplib<br /> Be low is a sample HTTP response<br /> HTTP/1.1 200<br /> Date : Thu, 05<br /> Server: Glassfish<br /> ETag: "0648791asd581sd1h1w31z1qwe<br /> Content-Type: text/html<br /> Cache-Control: max-age<br /> During a request there are several methods that can be used. Below  is a list of some available<br /> GET : Safe, Idempotent,<br /> PUT: Idempotent<br /> POST<br /> DELETE: Idempotent<br /> HEAD: Safe, Idempotent<br /> Characteristics that RESTful protocol are supposed to have<br /> Resources<br /> URI<br /> Uniform Interface<br /> Methods<br /> Representation<br /> Protoc ol<br /> Client-Server<br /> Stateless<br /> Cacheable<br /> Layered<br /> RESTful Webservices<br /> It is a service that uses HTTP and laws of REST. This service is a collection of resources with four defined characteristics<br /> Location address for the webservice (Base URI<br /> Type of data suppo rted by the webservice (XML or JSON<br /> HTTP methods<br /> Application interface must be hypertext driven<br /> Example of JSON.response<br /> car<br /> make" :<br /> color" :<br /> The response above can easily be manipulated into an array , object or even c onverted into an XML<br /> That makes the beauty of REST which is language , platform independent and also very fast execution process as compared to<br /><br /> When using RESTful applications, the links doesnot define the action of the request. Like  for example when fetching data , the link would<br /> http://www.abcd.org/users/1/surname<br /><br /> That will automatically fetches the surname of the user having id 1 u nlike other typical links like http://www.abcd.org/users/edit/1 . The<br /> application doesn't have to check for the action in the URL of a RESTful link to know what type of reponse to send<br /><br /> HTTP me thods that are usually used in RESTful webservices are GET for fetching data, PUT for addition or update of data and DELETE for deleting data<br /> One might easily notice the absence of POST request , a reason for that is that this type of request is<br /><br /> RESTful webservices usually uses design patterns such as FA€ADE in the application which makes total sense because FA€ADE allows for the total<br /> availability of different objects or methods by only one request which accentuates the speed of processing of th e webservice<br /> Across the different programming languages we can notice that several frameworks are used to create RESTful webservices<br /> Two examples are<br /> Java uses jersey framework<br /> Php uses codeigniter framework<br /> Whereas RESTful clients can be created in a ny languages that can decode/encode JSON or manipulate XML and no framework is even required<br /> Advantages of REST over SOAP<br /> It is language, platform independent<br /> it is easier to develop than SOAP<br /> It is lightweight, it does not need extra xml<br /> It is much fas ter<br /> Disadvantages of REST over SOAP<br /> It can only be used on HTTP<br /> It lacks support for security<br /> It cannot be used for sending messages to intermediaries<br /> References<br /> Tarandeep Singh. (August 24, 2009). REST vs. SOAP - The Right<br /><a href='http://stackoverflow.com/questions/10975863/compare-and-contrast-rest-and-soap-web-services' class="matched-text" title='http://stackoverflow.com/questions/10975863/compare-and-contrast-rest-and-soap-web-services' target='_blank'> http ://geeknizer.com/rest-vs-soap-using-http-choosing-the-right-webservice-protocol/. Last accessed 02 Oct</a><br /> Don Box. (08 May 2000). Simple Object Access<br /> Available: www.w3.org/TR/2000/NOTE-SOAP-20000508/.  Last accessed 03 Oct<br /> Jennifer Kyrnin. (). Simple Object Access Protocol<br /> Available: http://webdesign.about.com/od/soap/a/what-is-xml-soap.htm. Last accessed 03 Oct<br /> Steve Francia. (). SOAP vs.<br /> Available: http://spf13.com/post/soap-vs-rest/.  Last accessed 02 Oct<br /> Douglas K. Barry. ( 2000- 2012).<br /> Available: http://www.service-architecture.com/web-services/articles/web_services_explained.html. Last accessed 03 Oct<br /> Brennan Spies. ( May 2nd, 2008 ). Web Services ,<br /> Available:<a href='http://ajaxonomy.com/2008/xml/web-services-part-1-soap-vs-rest' class="matched-text" title='http://ajaxonomy.com/2008/xml/web-services-part-1-soap-vs-rest' target='_blank'> http://www.ajaxonomy.com/2008/xml/web-services-part-1-soap-vs-rest.  Last accessed 03 Oct</a><br /> John Cowan. (2005). RESTful Web Services. Available: http://home.ccil.org/~cowan/restws.pdf. Last accessed 03 Oct<br /> Joe Gregorio  Google Developer<br /></p>
+                        
+                        
+                    </div>
+                    
+                </div> 
+            </div>
+
+            <div id="footer">
+                <div id="footermenu">
+                    <div id="col1">
+                        <ul>
+                            <li>
+                                <a title="Plagiarism detection software" href="http://www.scanmyessay.com/plagiarism-detection-software.php">Plagiarism Detection Software</a>
+                            </li>
+                            <li>
+                                <a title=" Plagiarism Test" href="http://www.scanmyessay.com/plagiarism-test.php">Plagiarism Test </a>
+                            </li>
+                            <li>
+                                <a title="Plagiarism Detector" href="http://www.scanmyessay.com/plagiarism-detector.php">Plagiarism Detector</a>
+                            </li>
+                            <li>
+                                <a title="Detect Plagiarism" href="http://www.scanmyessay.com/detect-plagiarism.php">Detect Plagiarism</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div id="col2">
+                        <ul>
+                            <li>
+                                <a title="Essay Checker" href="http://www.scanmyessay.com/essay-checker.php">Essay Checker</a> 
+                                | <a href="http://www.scanmyessay.com/free-check-for-plagiarism.php">Free Check for Plagiarism</a>
+                            </li>
+                            <li>
+                                <a title="Free lesson plans" href="http://www.scanmyessay.com/lesson-plans.php">Lesson plans</a>
+                            </li>
+                            <li>
+                                <a title="Avoid plagiarism" href="http://www.scanmyessay.com/avoid-plagiarism.php">Avoid Plagiarism</a>
+                            </li>
+                            <li>
+                                <a title="Plagiarism Check" href="http://www.scanmyessay.com/plagiarism-check.php">Plagiarism Check</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div id="col3">
+                        <ul>
+                            <li>
+                                <a title="Plagiarism prevention software" href="http://www.scanmyessay.com/plagiarism-prevention.php">Plagiarism Prevention</a>
+                            </li>
+                            <li>
+                                <a title="Turnitin" href="http://www.scanmyessay.com/turnitin.php">Turnitin </a> | <a href="http://www.scanmyessay.com/check-for-plagiarism-free.php">Check for Plagiarism Free</a>
+                            </li>
+                            <li>
+                                <a title="Editing services" href="http://www.scanmyessay.com/essay-marking/index.php">Editing Services</a>
+                            </li>
+                            <li>
+                                <a title="Free Scanner Software" href="http://www.essaycoursework.com/coursework-writing.php">Coursework writing</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="footerbottom">
+                    <p>
+                        Copyright © 2012 All Rights Reserved. 
+                        <a href="http://www.scanmyessay.com">Scan My Essay</a> 
+                        - Free Plagiarism Scanner, Checker and Detection Tool.  
+                        Viper and ScanMyEssay.com are trading names of Angel Business Limited, 
+                        a Company registered in England and Wales with Company Registration No: 07344835, 
+                        The Loft, 3 Plumptre Street, The Lace Market, Nottingham NG1 1JL | 
+                        <a href="http://www.scanmyessay.com/viper-keygen-crack.php">Warning - Viper Keygen / Viper Crack</a>
+                    </p>
+                    <p>
+                        Please note that by using ScanMyEssay.com, VIPER and any other  software or resources on the ScanMyEssay Website, you are signifying  your agreement
+                        to our <a href="http://www.scanmyessay.com/terms.php">terms and conditions</a>, and our <a href="http://www.scanmyessay.com/privacy-policy.php">privacy policy</a> | <a href="http://www.scanmyessay.com/sitemap.xml">XML sitemap</a> 
+                        | <a href="http://www.scanmyessay.com/ror.xml">ROR</a> 
+                        | <a href="http://www.scanmyessay.com/urllist.txt">TXT</a>
+                        | <a href="http://www.scanmyessay.com/sitemap.html">HTML</a>
+                        | <a href="http://www.scanmyessay.com/sitemap.php">PHP</a> | <a href="http://cn.scanmyessay.com">剽窃检查</a>
+                        | <a href="http://es.scanmyessay.com">Verificador de plagio gratuito</a> 
+                        | <a href="http://fr.scanmyessay.com/">Détecteur de plagiat gratuit</a> 
+                        | <a href="http://in.scanmyessay.com/">Viper साहित्यिक चोरी जांचने का एक निशुल्क साधन...</a>
+
+                    </p>
+                </div> 
+            </div>
+
+        </div>
+         
+    </body>
+</html>
