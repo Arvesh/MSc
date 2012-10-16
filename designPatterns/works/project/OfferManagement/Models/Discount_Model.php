@@ -7,41 +7,18 @@ require_once 'config.php';
  *
  * @author Gulshan Bhaugeerothee
  */
-class Discount_Model implements IDiscount_IModel {
+class Discount_Model {
 
   private static $instance;
 
-  public function __construct() {
-    
+  private $offer;
+  
+  public function __construct(Offer_Model $offer) {
+      
+      $this->offer = $offer;
+      
   }
 
-  public function calculate(\ArrayObject $array, $type = null) {
-
-    switch (strtolower($type)) {
-      case 'percentage':
-        return $this->calcPercentage($array);
-        break;
-      case 'amount':
-        return $this->calcAmount($array);
-        break;
-      default :
-        return $this->calcNight($array);
-        break;
-    }
-  }
-
-  public function calcAmount(\ArrayObject $array) {
-    return 'calculate amount'.$array;
-  }
-
-  public function calcPercentage(\ArrayObject $array) {
-
-    return 'calculate percentage'.$array;
-  }
-
-  public function calcNight(\ArrayObject $array) {
-    return 'calculate night'.$array;
-  }
 
   public static function getInstance() {
 
@@ -51,5 +28,13 @@ class Discount_Model implements IDiscount_IModel {
     }
     return self::$instance;
   }
+  
+  public function calculateDiscount(IDiscount_IModel $discount){
+      
+      return $discount->calculate($this->offer);
+      
+  }
+  
+  
 
 }

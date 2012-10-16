@@ -5,7 +5,9 @@ require_once 'config.php';
  *
  * @author Gulshan Bhaugeerothee
  */
-class Honeymooners_Model extends AHoneymooners_AModel implements IOfferCalculator_IModel{
+class Honeymooners_Model extends AHoneymooners_AModel implements IOfferCreator_IModel{
+    
+    private $type = 'honeymooner';
     
     public function __construct() {
         
@@ -20,6 +22,11 @@ class Honeymooners_Model extends AHoneymooners_AModel implements IOfferCalculato
 
     public function calculate() {
         echo "honeymooners was calculated";
+    }
+
+    public function getType() {
+        
+        return $this->type;
     }
     
 }

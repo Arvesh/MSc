@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Abstract class of the late booking offer.
+ * Description of ALateBooking_AModel
  *
  * @author Gulshan Bhaugeerothee
  */

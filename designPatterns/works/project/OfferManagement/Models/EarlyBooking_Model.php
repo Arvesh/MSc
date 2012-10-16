@@ -5,20 +5,24 @@ require_once 'config.php';
  *
  * @author Gulshan Bhaugeerothee
  */
-class EarlyBooking_Model extends AEarlyBooking_AModel implements IOfferCalculator_IModel{
+class EarlyBooking_Model extends AEarlyBooking_AModel implements IOfferCreator_IModel{
     
-    private static $instance;
+    private $type = 'earlybooking';
     
-    public function __construct() {
-        
-        echo "early booking was constructed ==> constructor </br>";
-    }
-    
+   
     public function processEarlyBookingOffer() {
         
     }
+
+    
     
     public function calculate() {
         echo "early booking was calculated </br>";
+    }
+
+    public function getType() {
+        
+        return $this->type;
+        
     }
 }

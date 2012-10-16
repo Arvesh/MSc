@@ -5,7 +5,9 @@ require_once 'config.php';
  *
  * @author Gulshan Bhaugeerothee
  */
-class LateBooking_Model extends ALateBooking_AModel implements IOfferCalculator_IModel{
+class LateBooking_Model extends ALateBooking_AModel implements IOfferCreator_IModel{
+    
+    private $type = 'latebooking';
     
     public function processLateBookingOffer() {
         
@@ -15,5 +17,9 @@ class LateBooking_Model extends ALateBooking_AModel implements IOfferCalculator_
 
     public function calculate() {
         echo "late booking offer was calculated";
+    }
+
+    public function getType() {
+        return $this->type;
     }
 }
