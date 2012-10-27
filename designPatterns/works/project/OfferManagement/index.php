@@ -48,7 +48,9 @@ require_once 'config.php';
 
 //$offer = Offer_Model::getInstance();
 
-new Offer_Controller();
+
+
+//new Offer_Controller();
 
 /*================================TESTING OFFER FACTORY WITH DATABASE=============================
 $earlybookingOffer = Offer_Model::getInstance()->createEarlyBookingOffer();
@@ -72,4 +74,41 @@ if ($earlybookingOffer>0){
 
 /* @var $discountPercentage object */
 //$discountPercentage = $discount->calculateDiscount(new DiscountPercentage_Model());
+
+
+
+  $router = Router_Model::parse();
+  
+  $controller = !empty($router->controller)?$router->controller.'_Controller':null;
+  $action = $router->action;
+  $params = $router->params;
+  
+  if($action != null){
+
+   $controller = $controller::getInstance();
+  
+       if($params !=null){
+       
+           $controller->$action($params);
+  
+       }else{
+
+           $controller->$action();
+  
+       }
+  
+  }else{
+
+   if($controller !=null){
+
+       $controller::getInstance();
+  
+   }else{
+  
+       loadView('home');
+  
+   }
+  
+}
+
 ?>

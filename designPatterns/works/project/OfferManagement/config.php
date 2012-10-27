@@ -1,16 +1,28 @@
 <?php
+session_start();
 
     $config['MYSQL_SERVER'] = 'localhost';
     $config['MYSQL_USER'] = 'root';
-    $config['MYSQL_PW'] = '';
-    $config['MYSQL_DB'] = '_hotel';
+    $config['MYSQL_PW'] = 'sniper';
+    $config['MYSQL_DB'] = 'designpatterns_hotel';
     $config['MYSQL_PORT'] = '';
     $config['TODAY'] = date("Y/m/d");
+    $config['PROJECT_FOLDER'] = 'OfferManagement';
+    
+    
+    $absolute_url = explode($config['PROJECT_FOLDER'], $_SERVER['REQUEST_URI']);
+    $config['ABSOLUTE_URL'] = $absolute_url[0].$config['PROJECT_FOLDER'].'/';
+    
+     
 
     foreach($config as $key => $value)
         define ($key, $value);
-    
-    
+
+echo '<pre>';
+print_r(ABSOLUTE_URL);
+/*print_r($_SERVER);*/
+echo '</pre>';die;
+
 function __autoload($class) {
     
       /* @var $seperate array */
@@ -19,7 +31,7 @@ function __autoload($class) {
 
 
       /* @var $classType string */
-      $classType = $seperate[1];
+      $classType =  array_key_exists(1, $seperate)? $seperate[1]:'404';
 
       switch ($classType) {
 
@@ -47,17 +59,26 @@ function __autoload($class) {
             break;
         
         default:
-            throw new ClassNotFoundException("The object's class/filename doesn't exist.");
+            $path='Views/';
+          $class = '404';
             break;
 
       }
-
+      
       require_once $path . $class . '.php';
+      
 }
 
-function loadView($filename){
+function loadView($filename,$modal=false){
+  
+    if($modal==true){
+      
+      require_once 'Views/'.$filename.'.php';
+    }else{
+      $_SESSION['filename'] = $filename;
+      require_once 'Views/includes/template.php';
+    }
     
-    require_once 'Views/'.$filename.'.php';
 }
 
 ?>
