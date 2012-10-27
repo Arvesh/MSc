@@ -78,7 +78,7 @@ if ($earlybookingOffer>0){
 
 
   $router = Router_Model::parse();
-  
+//  print_r($router);
   $controller = !empty($router->controller)?$router->controller.'_Controller':null;
   $action = $router->action;
   $params = $router->params;

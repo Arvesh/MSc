@@ -3,8 +3,8 @@ session_start();
 
     $config['MYSQL_SERVER'] = 'localhost';
     $config['MYSQL_USER'] = 'root';
-    $config['MYSQL_PW'] = 'sniper';
-    $config['MYSQL_DB'] = 'designpatterns_hotel';
+    $config['MYSQL_PW'] = '';
+    $config['MYSQL_DB'] = '_hotel';
     $config['MYSQL_PORT'] = '';
     $config['TODAY'] = date("Y/m/d");
     $config['PROJECT_FOLDER'] = 'OfferManagement';
@@ -57,16 +57,22 @@ function __autoload($class) {
         
         default:
             $path='Views/';
-            $class = '404';
+          $class = '404';
             break;
 
       }
       
-      file_exists($path . $class . '.php') ? require_once $path . $class . '.php': loadView('404');
+      file_exists($path . $class . '.php') ? require_once $path . $class . '.php' : loadView('404');
       
 }
 
-function loadView($filename,$modal=false){
+function loadView($filename,$data = '',$modal=false){
+    
+    if(is_array($data)){
+        
+        foreach($data as $key=>$value) $$key = $value;
+        
+    }
   
     if($modal==true){
       

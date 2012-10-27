@@ -223,16 +223,16 @@ class Database_Model {
      * 
      * EXAMPLE : UPDATE table_name SET field1=value1,field2=value2 WHERE id= value_id
      * 
-     *  $fldarray['field1'] = value1;
-     *  $fldarray['field2'] =value2;
+     *  $valuesArray['field1'] = value1;
+     *  $valuesArray['field2'] =value2;
      * 
-     * $primearray['id'] = value_id;
+     * $whereArray['id'] = value_id;
      * 
-     * $this->updateRecord($primearray,$fldarray);
+     * $this->updateRecord($whereArray,$valuesArray);
      *
      *
-     * @param <array|mixed> $primearray
-     * @param <array|mixed> $fldarray
+     * @param <array|mixed> $whereArray
+     * @param <array|mixed> $valuesArray
      */
     public function updateRecord($primearray,$fldarray){
         $fldstr='';

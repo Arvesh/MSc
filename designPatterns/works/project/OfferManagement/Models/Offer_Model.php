@@ -11,6 +11,23 @@ class Offer_Model extends OfferFactory_AModel{
     private static $instance;
     private $strategyObject;
     protected $table_name = 'offer';
+    
+    /*
+     * Generic class to create offer
+     * @param $type -> type of offer to be created
+     * 
+     * KEYS:
+     *  offer_id xxxxxxx
+     *  offer_Name
+     *  valid_From
+     *  valid_To
+     *  date_Created
+     *  combinable
+     *  description
+     *  minimum_Stay
+     *  offer_Type_ID ----- FOREIGN KEY
+     */
+    private $data = array();
 
     /*SINGLETON*/
     public static function getInstance(){
@@ -24,15 +41,25 @@ class Offer_Model extends OfferFactory_AModel{
     }
     
     /*GENERIC SETTER*/
-    public function __set($name, $value) {
-        
-        throw ErrorException("NOT IMPLEMENTED");
+    public function __set($name, $value)
+    {
+        echo "Setting '$name' to '$value'\n";
+        $this->data[$name] = $value;
     }
     
     /*GENERIC GETTER*/
-    public function __get($name) {
+    public function __get($name)
+    {
+        $toReturn = null;
+        echo "Getting '$name'\n";
         
-        throw ErrorException("NOT IMPLEMENTED");
+        if (array_key_exists($name, $this->data)) {
+            
+           $toReturn = $this->data[$name];
+        }
+
+       
+        return $toReturn;
     }
         
     /*CREATING AN EARLY BOOKING OFFER*/
@@ -54,21 +81,49 @@ class Offer_Model extends OfferFactory_AModel{
         return $this->createBookingOffer( new LateBooking_Model());
     }
     
-    /*
-     * Generic class to create offer
-     * @param $type -> type of offer to be created
-     * 
-     * FIELDS:
-     *  offer_id xxxxxxx
-     *  offer_Name
-     *  valid_From
-     *  valid_To
-     *  date_Created
-     *  combinable
-     *  description
-     *  minimum_Stay
-     *  offer_Type_ID ----- FOREIGN KEY
-     */
+    
+    public  function  updateEarlyBookingOffer() {
+        
+        return $this->updateBookingOffer(new EarlyBooking_Model());
+        
+    }    
+   
+    /*CREATING A HONEYMOONER OFFER*/
+    public function updateHoneymoonersOffer() {
+        
+        return $this->updateBookingOffer(new Honeymooners_Model());
+    }
+    
+    /*CREATING A LATE BOOKING OFFER*/
+    public function updateLateBookingOffer() {
+        
+        return $this->updateBookingOffer( new LateBooking_Model());
+    }
+    
+    public function updateBookingOffer(IOfferCreator_IModel $type){
+        
+        $this->getConnection();
+        
+        $this->setTable('offer_type');
+        
+        $fldarray['offer_Type_ID'] =  $this->resultToArray(
+                                                    $this->selectRecord(
+                                                            array('offer_type'=>$type->getType()),
+                                                            '*')
+                                        );
+        $this->offer_Type_ID = $fldarray['offer_Type_ID'][0]['id'];
+        
+        $this->setTable($this->table_name);
+        
+        $where = array('offer_id'=>$this->data['offer_id']);
+        unset($this->data['offer_id']);
+        
+        $this->updateRecord($where,$this->data);
+        
+        return $this->affectedRows();
+    }
+    
+    
     public function createBookingOffer(IOfferCreator_IModel $type){
         
         $this->getConnection();
@@ -80,26 +135,11 @@ class Offer_Model extends OfferFactory_AModel{
                                                             array('offer_type'=>$type->getType()),
                                                             '*')
                                         );
+        $this->offer_Type_ID = $fldarray['offer_Type_ID'][0]['id'];
         
         $this->setTable($this->table_name);
         
-        $fldarray['offer_Type_ID'] = $fldarray['offer_Type_ID'][0]['id'];
-        
-        $fldarray['offer_Name'] = 'testOffer';
-        
-        $fldarray['valid_From'] = TODAY;
-        
-        $fldarray['valid_To'] = date("Y/m/d",  strtotime("2012/10/11"));
-        
-        $fldarray['date_Created'] = TODAY;
-        
-        $fldarray['combinable'] = 0;
-        
-        $fldarray['description'] = 'some sample descriptions';
-        
-        $fldarray['minimum_Stay'] = '2';
-        
-        $this->insertRecord($fldarray);
+        $this->insertRecord($this->data);
         
         return $this->affectedRows();
         

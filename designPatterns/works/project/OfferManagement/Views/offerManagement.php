@@ -1,17 +1,27 @@
-<input type="hidden" id="titlePage" name="titlePage" value="Create Offer" />
-  <form action="<?php echo ABSOLUTE_URL ?>offer/save" method="post">
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title></title>
+    </head>
+    <body>
+        <?php
+        // put your code here
+        ?>
+        <form>
             Enter Customer Name
            <input type="text" name="customer"> </input><br>
             Select Room
             <hr>
-            <input type="radio" name="RoomOpt[]" value="allrooms" id="">All Rooms
-           
-           <label for="">Specific Rooms</label>
+            <input type="radio" name="allrooms" value="allrooms">All Rooms
+            <input type="radio" name="specificroom" value="specificroom">Specific Room
+            <br>
             <select id="selectroom" name="selectroom" >
                 <option>--Select Room--</option>
-                <?php foreach($rooms as $room): ?>
-                <option value="<?php echo $room["room_Id"] ?>"><?php echo $room['room_Name']; ?></option>
-                <?php endforeach;?>
             </select>
             <input type="submit" value="Add Room to listbox"></input>
             <br>
@@ -54,3 +64,5 @@
             
             
         </form>
+    </body>
+</html>
