@@ -57,12 +57,12 @@ function __autoload($class) {
         
         default:
             $path='Views/';
-          $class = '404';
+            $class = '404';
             break;
 
       }
       
-      require_once $path . $class . '.php';
+      file_exists($path . $class . '.php') ? require_once $path . $class . '.php': loadView('404');
       
 }
 
