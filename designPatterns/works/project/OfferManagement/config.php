@@ -11,17 +11,14 @@ session_start();
     
     
     $absolute_url = explode($config['PROJECT_FOLDER'], $_SERVER['REQUEST_URI']);
-    $config['ABSOLUTE_URL'] = $absolute_url[0].$config['PROJECT_FOLDER'].'/';
+    $config['ABSOLUTE_URL'] = 'http://'.$_SERVER['HTTP_HOST'].$absolute_url[0].$config['PROJECT_FOLDER'].'/';
     
      
 
     foreach($config as $key => $value)
         define ($key, $value);
 
-echo '<pre>';
-print_r(ABSOLUTE_URL);
-/*print_r($_SERVER);*/
-echo '</pre>';die;
+
 
 function __autoload($class) {
     
