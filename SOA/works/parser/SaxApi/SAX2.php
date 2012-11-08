@@ -96,7 +96,7 @@ class SAX2 {
       if ($chars[$Cursorposition] == "<") {
         $this->setState(1);
         //$this->clearElement();
-        //  print "<br/>";
+        //  echo "<br/>";
       } else if ($this->getState() == 1 && $this->getState() != 2) {
         if ($this->getState() != 4 && $chars[$Cursorposition] != " ") {
           if ($chars[$Cursorposition] != "/") {
